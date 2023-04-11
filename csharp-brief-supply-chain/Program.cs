@@ -1,6 +1,7 @@
 ﻿using csharp_brief_supply_chain.database;
 using csharp_brief_supply_chain.database.tables;
 using Npgsql;
+using System.Linq;
 
 namespace csharp_brief_supply_chain
 {
@@ -27,8 +28,7 @@ namespace csharp_brief_supply_chain
                 {
                     while (reader.Read())
                     {
-                        Entrepot entrepot = new Entrepot(reader);
-                        entrepots.Add(entrepot);
+                        entrepots.Add(new Entrepot(reader));
                     }
                 }
             }
@@ -39,14 +39,18 @@ namespace csharp_brief_supply_chain
                 {
                     while (reader.Read())
                     {
-                        Expedition expedition = new Expedition(reader);
-                        expeditions.Add(expedition);
+                        expeditions.Add(new Expedition(reader));
                     }
                 }
             }
 
-            Console.WriteLine(string.Join("\n", entrepots.Select(entrepot => entrepot.ToString())));
-            Console.WriteLine(string.Join("\n", expeditions.Select(expedition => expedition.ToString())));
+            // Console.WriteLine(string.Join("\n", entrepots.Select(entrepot => entrepot.ToString())));
+            // Console.WriteLine(string.Join("\n", expeditions.Select(expedition => expedition.ToString())));
+
+            var testSelect = databaseManager.SelectAll("entrepots")
+                .Select(dictionary => new Entrepot(dictionary));
+
+            Console.WriteLine(string.Join("\n", testSelect.Select(entrepot => entrepot.ToString())));
 
             while (true)
             {

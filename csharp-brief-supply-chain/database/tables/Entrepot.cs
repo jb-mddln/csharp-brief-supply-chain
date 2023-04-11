@@ -45,6 +45,15 @@ namespace csharp_brief_supply_chain.database.tables
             this.Pays = (string)reader["pays"];
         }
 
+        public Entrepot(Dictionary<string, object> data)
+        {
+            this.Id = (int)data["id"];
+            this.Nom = (string)data["nom_entrepot"];
+            this.Adresse = (string)data["adresse"];
+            this.Ville = (string)data["ville"];
+            this.Pays = (string)data["pays"];
+        }
+
         /// <summary>
         /// Retourne les informations de l'entrepôt sous forme de chaine de caractères
         /// </summary>
