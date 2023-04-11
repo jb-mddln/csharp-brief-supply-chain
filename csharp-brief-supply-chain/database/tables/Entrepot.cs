@@ -38,11 +38,11 @@ namespace csharp_brief_supply_chain.database.tables
         /// <param name="reader">NpgsqlDataReader de notre commande PostgreSQL</param>
         public Entrepot(IDataRecord reader)
         {
-            Id = (int)reader["id"];
-            Nom = (string)reader["nom_entrepot"];
-            Adresse = (string)reader["adresse"];
-            Ville = (string)reader["ville"];
-            Pays = (string)reader["pays"];
+            this.Id = (int)reader["id"];
+            this.Nom = (string)reader["nom_entrepot"];
+            this.Adresse = (string)reader["adresse"];
+            this.Ville = (string)reader["ville"];
+            this.Pays = (string)reader["pays"];
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace csharp_brief_supply_chain.database.tables
         /// <returns>Infos de l'entrepôt</returns>
         public override string ToString()
         {
-            return $"Id: {Id}, Nom: {Nom}, Adresse: {Adresse}, Ville: {Ville}, Pays: {Pays}";
+            return $"Id: {this.Id}, Nom: {this.Nom}, Adresse: {this.Adresse}, Ville: {this.Ville}, Pays: {this.Pays}";
         }
     }
 }

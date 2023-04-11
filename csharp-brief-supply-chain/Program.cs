@@ -25,11 +25,9 @@ namespace csharp_brief_supply_chain
             {
                 using (NpgsqlDataReader reader = cmd.ExecuteReader())
                 {
-
                     while (reader.Read())
                     {
                         Entrepot entrepot = new Entrepot(reader);
-
                         entrepots.Add(entrepot);
                     }
                 }
@@ -41,23 +39,14 @@ namespace csharp_brief_supply_chain
                 {
                     while (reader.Read())
                     {
-                        Expedition expedition = new Expedition();
-                        expedition.Id = (int)reader["id"];
-                        expedition.DateExpedition = (DateTime)reader["date_expedition"];
-                        expedition.DateLivraison = reader["date_livraison"] is DBNull ? null : (DateTime)reader["date_livraison"];
-                        expedition.EntrepotSourceId = (int)reader["id_entrepot_source"];
-                        expedition.EntrepotDestinationId = (int)reader["id_entrepot_destination"];
-                        expedition.Poids = (decimal)reader["poids"];
-                        expedition.Statut = (string)reader["statut"];
-                        expedition.DateLivraisonPrevu = (DateTime)reader["date_livraison_prevu"];
-
+                        Expedition expedition = new Expedition(reader);
                         expeditions.Add(expedition);
                     }
                 }
             }
 
             Console.WriteLine(string.Join("\n", entrepots.Select(entrepot => entrepot.ToString())));
-            // Console.WriteLine(string.Join("\n", expeditions.Select(expedition => expedition.ToString())));
+            Console.WriteLine(string.Join("\n", expeditions.Select(expedition => expedition.ToString())));
 
             while (true)
             {
