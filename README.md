@@ -1,4 +1,4 @@
-# Exercice Console C# .NET 6.0,
+# Exercice Console C# .NET 6.0
 * Gstion d'une base de donnée de manière simpliste avec PostgreSQL et Npgsql (Connexion, requêtes CRUD)
 * Toutes les requêtes du brief sont dans le dossier sql du repo
  
