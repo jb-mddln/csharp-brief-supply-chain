@@ -1,5 +1,4 @@
-# csharp-brief-supply-chain
- Exercice Console C# .NET 6.0, gestion d'une base de donnée de manière simpliste avec PostgreSQL et Npgsql (Connexion, requêtes CRUD)
+# Exercice Console C# .NET 6.0, gestion d'une base de donnée de manière simpliste avec PostgreSQL et Npgsql (Connexion, requêtes CRUD)
 * Toutes les requêtes du brief sont dans le dossier sql du repo
  
 ### Contexte du projet
