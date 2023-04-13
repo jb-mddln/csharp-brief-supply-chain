@@ -70,22 +70,23 @@ INSERT INTO clients (nom, adresse, ville, pays)
 		('Toto', '27 Rue du Chêne, 78000', 'Paris', 'France'),
 		('Florence', '142 Rue du Bois, 78000', 'Paris', 'France');
 
+-- table pour désigner un client qui a envoyé une commande
 INSERT INTO expeditions_clients (id_expedition, id_client) 
 		VALUES (3, 1),
 		(4, 2),
 		(1, 3);
 		
--- Update expeditions pour mettre nos id_client
+-- Update expeditions pour mettre nos id_client qui ont reçues la commande
 UPDATE expeditions
-	SET id_client = 1
+	SET id_client = 3
 	WHERE id = 3;
 	
 UPDATE expeditions
-	SET id_client = 2
+	SET id_client = 1
 	WHERE id = 4;
 
 UPDATE expeditions
-	SET id_client = 3
+	SET id_client = 2
 	WHERE id = 1;
 
 -- Écrivez des requêtes pour extraire les informations suivantes : 
@@ -97,3 +98,13 @@ select table1, count(table2) as total_exp, sum(case when table3.date_livraison i
 	group by table1;
 	
 --Pour chaque expédition, affichez son ID, son poids, le nom du client qui l'a envoyée, le nom du client qui l'a reçue et le statut
+select 
+	expedition.id as id_expedition,
+	expedition.poids as poids_expedition,
+	client.nom as nom_client,
+	client_reçues.nom as nom_client_reçues,
+	expedition.statut as statut
+		from expeditions_clients
+			inner join clients as client on client.id = expeditions_clients.id_client
+			inner join expeditions as expedition on expedition.id = expeditions_clients.id_expedition
+			inner join clients as client_reçues on client_reçues.id = expedition.id_client;
