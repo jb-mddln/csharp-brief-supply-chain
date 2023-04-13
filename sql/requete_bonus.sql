@@ -37,7 +37,7 @@ AS $BODY$
 	END;
 $BODY$
 
-call compte_entrepots(5,total_entrepots := 0);
+select livraison_jour('2021-11-23');
 
 --Ajoutez une table "clients" contenant les colonnes suivantes :
 --id (entier auto-incrémenté, clé primaire) nom (chaîne de caractères) adresse (chaîne de caractères) ville (chaîne de caractères) pays (chaîne de caractères)
@@ -60,5 +60,38 @@ create table expeditions_clients (
 );
 
 --Modifiez la table "expeditions" pour y ajouter une colonne "id_client" (entier, clé étrangère faisant référence à la table "clients").
---Ajoutez des données aux tables "clients" et "expeditions_clients". **Écrivez des requêtes pour extraire les informations suivantes : **- Pour chaque client, affichez son nom, son adresse complète, le nombre total d'expéditions qu'il a envoyées et le nombre total d'expéditions qu'il a reçues.
+ALTER TABLE expeditions ADD COLUMN id_client INT
+	CONSTRAINT fk_id_client REFERENCES clients (id)
+	ON UPDATE CASCADE ON DELETE CASCADE;
+
+--Ajoutez des données aux tables "clients" et "expeditions_clients".
+INSERT INTO clients (nom, adresse, ville, pays) 
+		VALUES ('Jb', '33 Gran Vida, 28013', 'Madrid', 'Espagne'),
+		('Toto', '27 Rue du Chêne, 78000', 'Paris', 'France'),
+		('Florence', '142 Rue du Bois, 78000', 'Paris', 'France');
+
+INSERT INTO expeditions_clients (id_expedition, id_client) 
+		VALUES (3, 1),
+		(4, 2),
+		(1, 3);
+		
+-- Update expeditions pour mettre nos id_client
+/* UPDATE expeditions
+	SET id_client = 1
+	WHERE id = 3;
+	
+UPDATE expeditions
+	SET id_client = 2
+	WHERE id = 4;
+
+UPDATE expeditions
+	SET id_client = 3
+	WHERE id = 1; */
+
+-- Écrivez des requêtes pour extraire les informations suivantes : 
+-- Pour chaque client, affichez son nom, son adresse complète, le nombre total d'expéditions qu'il a envoyées et le nombre total d'expéditions qu'il a reçues
+
+select * from clients
+	inner join expeditions on expeditions.id_client = expeditions_clients.id_client
+
 --Pour chaque expédition, affichez son ID, son poids, le nom du client qui l'a envoyée, le nom du client qui l'a reçue et le statut
