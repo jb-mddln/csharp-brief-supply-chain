@@ -18,7 +18,7 @@ AS $BODY$
 		SELECT COUNT(*) FROM expeditions into total_expedition
 		WHERE id_entrepot_source = id_entrepot and current_date - interval '30' day < expeditions.date_expedition;
     END;
-$BODY$
+$BODY$;
 
 -- appelle notre procédure := 0 pour définir une valeur de base de 0 sur notre valeur de retour total_expedition 
 call compte_expeditions_par_entrepot(3, total_expedition := 0);
@@ -35,7 +35,7 @@ AS $BODY$
 	where date_livraison = param1;
 	return total_expedition;
 	END;
-$BODY$
+$BODY$;
 
 select livraison_jour('2021-11-23');
 
@@ -76,7 +76,7 @@ INSERT INTO expeditions_clients (id_expedition, id_client)
 		(1, 3);
 		
 -- Update expeditions pour mettre nos id_client
-/* UPDATE expeditions
+UPDATE expeditions
 	SET id_client = 1
 	WHERE id = 3;
 	
@@ -86,12 +86,14 @@ UPDATE expeditions
 
 UPDATE expeditions
 	SET id_client = 3
-	WHERE id = 1; */
+	WHERE id = 1;
 
 -- Écrivez des requêtes pour extraire les informations suivantes : 
 -- Pour chaque client, affichez son nom, son adresse complète, le nombre total d'expéditions qu'il a envoyées et le nombre total d'expéditions qu'il a reçues
-
-select * from clients
-	inner join expeditions on expeditions.id_client = expeditions_clients.id_client
-
+select table1, count(table2) as total_exp, sum(case when table3.date_livraison is not null then 1 else 0 end) as total_reçues
+	from clients as table1
+    inner join expeditions_clients as table2 on table1.id = table2.id_client
+    inner join expeditions as table3 on table3.id_client = table2.id_client
+	group by table1;
+	
 --Pour chaque expédition, affichez son ID, son poids, le nom du client qui l'a envoyée, le nom du client qui l'a reçue et le statut
