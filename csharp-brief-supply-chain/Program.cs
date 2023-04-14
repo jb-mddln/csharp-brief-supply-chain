@@ -1,7 +1,6 @@
-﻿using csharp_brief_supply_chain.database;
-using csharp_brief_supply_chain.database.tables;
-using Npgsql;
-using System.Linq;
+﻿using csharp_brief_supply_chain.Database;
+using csharp_brief_supply_chain.Database.Entities;
+using csharp_brief_supply_chain.Database.Repositories;
 
 namespace csharp_brief_supply_chain
 {
@@ -9,9 +8,6 @@ namespace csharp_brief_supply_chain
     {
         private static void Main(string[] args)
         {
-            List<Entrepot> entrepots = new List<Entrepot>();
-            List<Expedition> expeditions = new List<Expedition>();
-
             DatabaseManager databaseManager = new DatabaseManager
             {
                 Host = "localhost",
@@ -22,35 +18,22 @@ namespace csharp_brief_supply_chain
 
             databaseManager.OpenConnection();
 
-            using (NpgsqlCommand cmd = new NpgsqlCommand("select * from entrepots;", databaseManager.Connection))
-            {
-                using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        entrepots.Add(new Entrepot(reader));
-                    }
-                }
-            }
+            EntrepotRepository entrepotRepository = new EntrepotRepository(databaseManager.Connection);
 
-            using (NpgsqlCommand cmd = new NpgsqlCommand("select * from expeditions;", databaseManager.Connection))
-            {
-                using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        expeditions.Add(new Expedition(reader));
-                    }
-                }
-            }
+            Entrepot? entrepotToFind = entrepotRepository.GetById(6);
+            if (entrepotToFind != null)
+                Console.WriteLine(entrepotToFind.ToString());
 
-            // Console.WriteLine(string.Join("\n", entrepots.Select(entrepot => entrepot.ToString())));
-            // Console.WriteLine(string.Join("\n", expeditions.Select(expedition => expedition.ToString())));
+            Entrepot testSaveEntrepot = new Entrepot();
+            testSaveEntrepot.Id = entrepotRepository.GetNextFreeId();
+            testSaveEntrepot.Nom = "Test Ajout";
+            testSaveEntrepot.Ville = "Lille";
+            testSaveEntrepot.Adresse = "451 Rue de Lille";
+            testSaveEntrepot.Pays = "France";
 
-            var testSelect = databaseManager.SelectAll("entrepots")
-                .Select(dictionary => new Entrepot(dictionary));
+            // entrepotRepository.Insert(testSaveEntrepot);
 
-            Console.WriteLine(string.Join("\n", testSelect.Select(entrepot => entrepot.ToString())));
+            entrepotRepository.Delete(7);
 
             while (true)
             {

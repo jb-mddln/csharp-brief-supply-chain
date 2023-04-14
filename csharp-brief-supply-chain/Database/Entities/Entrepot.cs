@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace csharp_brief_supply_chain.database.tables
+namespace csharp_brief_supply_chain.Database.Entities
 {
     /// <summary>
     /// Représente un objet de notre table entrepots
@@ -15,22 +15,29 @@ namespace csharp_brief_supply_chain.database.tables
         /// <summary>
         /// Champ id sur notre table entrepots
         /// </summary>
-        public string Nom { get; set; }
+        public string Nom { get; set; } = "";
 
         /// <summary>
         /// Champ id sur notre table entrepots
         /// </summary>
-        public string Adresse { get; set; }
+        public string Adresse { get; set; } = "";
 
         /// <summary>
         /// Champ id sur notre table entrepots
         /// </summary>
-        public string Ville { get; set; }
+        public string Ville { get; set; } = "";
 
         /// <summary>
         /// Champ id sur notre table entrepots
         /// </summary>
-        public string Pays { get; set; }
+        public string Pays { get; set; } = "";
+
+        /// <summary>
+        /// Constructeur par défaut
+        /// </summary>
+        public Entrepot()
+        {
+        }
 
         /// <summary>
         /// Constructeur qui initialise notre objet avec le NpgsqlDataReader
@@ -43,15 +50,6 @@ namespace csharp_brief_supply_chain.database.tables
             this.Adresse = (string)reader["adresse"];
             this.Ville = (string)reader["ville"];
             this.Pays = (string)reader["pays"];
-        }
-
-        public Entrepot(Dictionary<string, object> data)
-        {
-            this.Id = (int)data["id"];
-            this.Nom = (string)data["nom_entrepot"];
-            this.Adresse = (string)data["adresse"];
-            this.Ville = (string)data["ville"];
-            this.Pays = (string)data["pays"];
         }
 
         /// <summary>

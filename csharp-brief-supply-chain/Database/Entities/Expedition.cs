@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace csharp_brief_supply_chain.database.tables
+namespace csharp_brief_supply_chain.Database.Entities
 {
     /// <summary>
     /// Représente un objet de notre table expeditions
@@ -48,6 +48,11 @@ namespace csharp_brief_supply_chain.database.tables
         public DateTime DateLivraisonPrevu { get; set; }
 
         /// <summary>
+        /// Champ id_client sur notre table expeditions
+        /// </summary>
+        public int? IdClient { get; set; }
+
+        /// <summary>
         /// Constructeur qui initialise notre objet avec le NpgsqlDataReader
         /// </summary>
         /// <param name="reader">NpgsqlDataReader de notre commande PostgreSQL</param>
@@ -61,6 +66,7 @@ namespace csharp_brief_supply_chain.database.tables
             this.Poids = (decimal)reader["poids"];
             this.Statut = (string)reader["statut"];
             this.DateLivraisonPrevu = (DateTime)reader["date_livraison_prevu"];
+            this.IdClient = (int?)reader["id_client"];
         }
 
         /// <summary>
@@ -69,7 +75,7 @@ namespace csharp_brief_supply_chain.database.tables
         /// <returns>Infos de l'expédition</returns>
         public override string ToString()
         {
-            return $"Id: {this.Id}, Date Expedition: {this.DateExpedition:dd/MM/yyyy}, Date Livraison: {this.DateLivraison:dd/MM/yyyy}, Entrepot Source Id: {this.EntrepotSourceId}, Entrepot Destination Id: {this.EntrepotDestinationId}, Poids: {this.Poids}, Statut: {this.Statut}, DateLivraisonPrevu: {this.DateLivraisonPrevu:dd/MM/yyyy}";
+            return $"Id: {this.Id}, Date Expedition: {this.DateExpedition:dd/MM/yyyy}, Date Livraison: {this.DateLivraison:dd/MM/yyyy}, Entrepot Source Id: {this.EntrepotSourceId}, Entrepot Destination Id: {this.EntrepotDestinationId}, Poids: {this.Poids}, Statut: {this.Statut}, DateLivraisonPrevu: {this.DateLivraisonPrevu:dd/MM/yyyy}, IdClient: {IdClient}";
         }
     }
 }
