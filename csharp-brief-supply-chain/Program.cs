@@ -46,19 +46,25 @@ namespace csharp_brief_supply_chain
             Console.WriteLine("Expeditions Clients list:");
             Console.WriteLine(string.Join("\n", allExpeditionsClients.Select(expeditionClient => expeditionClient.ToString())));
 
-            Entrepot? entrepotToFind = entrepotRepository.GetById(6);
-            if (entrepotToFind != null)
-                Console.WriteLine(entrepotToFind.ToString());
+            // Exemple d'utilisation d'un de nos repository, l'usage est le même pour chaque repo du projet
 
-            Entrepot testSaveEntrepot = new Entrepot();
-            testSaveEntrepot.Id = entrepotRepository.GetNextFreeId();
-            testSaveEntrepot.Nom = "Test Ajout";
-            testSaveEntrepot.Ville = "Lille";
-            testSaveEntrepot.Adresse = "451 Rue de Lille";
-            testSaveEntrepot.Pays = "France";
+            // Cherche dans notre base de données l'entrepôt avec l'id 6 si on trouve un résultat on l'affiche avec ToString() dans notre console
+            Entrepot? entrepotGetById = entrepotRepository.GetById(6);
+            if (entrepotGetById != null)
+                Console.WriteLine($"\nEntrepot found:\n{entrepotGetById.ToString()}");
 
-            // entrepotRepository.Insert(testSaveEntrepot);
+            // Créer une nouvelle instance de notre class/objet entrepôt en vue de l'insérer dans notre base de données
+            Entrepot entrepotInsert = new Entrepot();
+            entrepotInsert.Id = entrepotRepository.GetNextFreeId();
+            entrepotInsert.Nom = "Entrepot #7";
+            entrepotInsert.Ville = "Lille";
+            entrepotInsert.Adresse = "451 Rue de Lille";
+            entrepotInsert.Pays = "France";
 
+            // Ajoute le nouveau entrepôt en base de données
+            entrepotRepository.Insert(entrepotInsert);
+
+            // Supprime notre entrepôt avec l'id 7 de notre base de données
             entrepotRepository.Delete(7);
 
             while (true)

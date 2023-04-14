@@ -65,6 +65,13 @@ namespace csharp_brief_supply_chain.Database.Repositories
             if (expeditionClient.IdClient < 0)
                 return;
 
+            var expeditionClientGetById = GetById(expeditionClient.IdExpedition);
+            if (expeditionClient != null)
+            {
+                Console.WriteLine($"Error while trying to insert expeditionClient {expeditionClient.IdExpedition}, expeditionClient already exist in database");
+                return;
+            }
+
             using (var cmd = new NpgsqlCommand("insert into expeditions_clients (id_expedition, id_client) VALUES (@id_expedition, @id_client)", Connection))
             {
                 cmd.Parameters.AddWithValue("id_expedition", expeditionClient.IdExpedition);
