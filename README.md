@@ -10,6 +10,8 @@ Dans un langage de programmation serveur de votre choix, créer des classes enti
 * Modifier la base de données pour ajouter des modes d'expédition (naval, aérien, ferroviaire, routier) qui aura leurs propres valeurs selon le type (par exemple le nombre de wagons et la compagnie pour le ferroviaire, le poids max pour l'aérien, ce genre de chose) mais aussi des valeurs communes (prix au km, émission C02 au kilo, un temps moyen au km)
 * Gérer les relations d'une manière ou d'une autre dans les DAO
 * Faire un DAO/Repository générique qui nous éviterait de répéter le  CRUD de base pour chaque entité
+----------
+# Rendu
 <details>
   <summary>Console</summary>
   <img src="cli.png">
