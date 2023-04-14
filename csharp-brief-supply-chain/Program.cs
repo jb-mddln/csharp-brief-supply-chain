@@ -15,10 +15,27 @@ namespace csharp_brief_supply_chain
                 Password = "root",
                 Database = "transport_logistique"
             };
-
             databaseManager.OpenConnection();
 
+            // Initialise nos différents repository
+            ClientRepository clientRepository = new ClientRepository(databaseManager.Connection);
             EntrepotRepository entrepotRepository = new EntrepotRepository(databaseManager.Connection);
+            ExpeditionRepository expeditionRepository = new ExpeditionRepository(databaseManager.Connection);
+            ExpeditionClientRepository expeditionClientRepository = new ExpeditionClientRepository(databaseManager.Connection);
+
+            // Test sur nos GetAll
+            var allClients = clientRepository.GetAll();
+            var allEntrepots = entrepotRepository.GetAll();
+            var allExpeditions = expeditionRepository.GetAll();
+            var allExpeditionsClients = expeditionClientRepository.GetAll();
+
+            Console.WriteLine(string.Join("\n", allClients.Select(client => client.ToString())));
+            Console.WriteLine("\n");
+            Console.WriteLine(string.Join("\n", allEntrepots.Select(entrepot => entrepot.ToString())));
+            Console.WriteLine("\n");
+            Console.WriteLine(string.Join("\n", allExpeditions.Select(expedition => expedition.ToString())));
+            Console.WriteLine("\n");
+            Console.WriteLine(string.Join("\n", allExpeditionsClients.Select(expeditionClient => expeditionClient.ToString())));
 
             Entrepot? entrepotToFind = entrepotRepository.GetById(6);
             if (entrepotToFind != null)

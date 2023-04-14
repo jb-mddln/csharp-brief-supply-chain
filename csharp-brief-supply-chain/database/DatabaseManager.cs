@@ -2,6 +2,9 @@
 
 namespace csharp_brief_supply_chain.Database
 {
+    /// <summary>
+    /// Classe permettant de "gérer" notre base de données
+    /// </summary>
     public class DatabaseManager
     {
         public string Host { get; set; } = "localhost";
@@ -14,6 +17,9 @@ namespace csharp_brief_supply_chain.Database
 
         public NpgsqlConnection? Connection { get; set; }
 
+        /// <summary>
+        /// Essaye d'établir une connexion à notre base de données
+        /// </summary>
         public void OpenConnection()
         {
             NpgsqlDataSourceBuilder dataSourceBuilder = new NpgsqlDataSourceBuilder($"host={Host};username={Username};password={Password};database={Database};");

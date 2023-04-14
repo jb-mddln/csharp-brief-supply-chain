@@ -66,7 +66,7 @@ namespace csharp_brief_supply_chain.Database.Entities
             this.Poids = (decimal)reader["poids"];
             this.Statut = (string)reader["statut"];
             this.DateLivraisonPrevu = (DateTime)reader["date_livraison_prevu"];
-            this.IdClient = (int?)reader["id_client"];
+            this.IdClient = reader["id_client"] is DBNull ? null : (int)reader["id_client"];
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace csharp_brief_supply_chain.Database.Entities
         /// <returns>Infos de l'expédition</returns>
         public override string ToString()
         {
-            return $"Id: {this.Id}, Date Expedition: {this.DateExpedition:dd/MM/yyyy}, Date Livraison: {this.DateLivraison:dd/MM/yyyy}, Entrepot Source Id: {this.EntrepotSourceId}, Entrepot Destination Id: {this.EntrepotDestinationId}, Poids: {this.Poids}, Statut: {this.Statut}, DateLivraisonPrevu: {this.DateLivraisonPrevu:dd/MM/yyyy}, IdClient: {IdClient}";
+            return $"Id: {this.Id}, Date Expedition: {this.DateExpedition:dd/MM/yyyy}, Date Livraison: {(DateLivraison.HasValue ? this.DateLivraison.Value.ToString("dd/MM/yyyy") : "null" )}, Entrepot Source Id: {this.EntrepotSourceId}, Entrepot Destination Id: {this.EntrepotDestinationId}, Poids: {this.Poids}, Statut: {this.Statut}, DateLivraisonPrevu: {this.DateLivraisonPrevu:dd/MM/yyyy}, IdClient: {(IdClient.HasValue ? this.IdClient.Value : "null")}";
         }
     }
 }
