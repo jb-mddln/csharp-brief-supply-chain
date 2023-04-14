@@ -12,7 +12,7 @@ Dans un langage de programmation serveur de votre choix, créer des classes enti
 * Faire un DAO/Repository générique qui nous éviterait de répéter le  CRUD de base pour chaque entité
 <details>
   <summary>Console</summary>
-  <img src="cli.gif">
+  <img src="cli.png">
 </details>
 
 ----------
