@@ -37,7 +37,7 @@ AS $BODY$
 	END;
 $BODY$;
 
-select livraison_jour('2021-11-23');
+select livraison_jour('2023-04-04');
 
 --Ajoutez une table "clients" contenant les colonnes suivantes :
 --id (entier auto-incrémenté, clé primaire) nom (chaîne de caractères) adresse (chaîne de caractères) ville (chaîne de caractères) pays (chaîne de caractères)
