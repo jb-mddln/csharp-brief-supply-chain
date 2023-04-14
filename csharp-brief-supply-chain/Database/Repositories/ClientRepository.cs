@@ -62,6 +62,13 @@ namespace csharp_brief_supply_chain.Database.Repositories
             if (client.Id < 0)
                 return;
 
+            var clientGetById = GetById(client.Id);
+            if (clientGetById != null)
+            {
+                Console.WriteLine($"Error while trying to insert client {client.Id}, client already exist in database");
+                return;
+            }
+
             using (var cmd = new NpgsqlCommand("insert into clients (id, nom, adresse, ville, pays) VALUES (@id, @nom, @adresse, @ville, @pays)", Connection))
             {
                 cmd.Parameters.AddWithValue("id", client.Id);
@@ -89,7 +96,7 @@ namespace csharp_brief_supply_chain.Database.Repositories
 
             if (client.Id < 0)
                 return;
-
+            
             using (var cmd = new NpgsqlCommand("update clients set id=@id, nom=@nom, adresse=@adresse, ville=@ville, pays=@pays)", Connection))
             {
                 cmd.Parameters.AddWithValue("id", client.Id);

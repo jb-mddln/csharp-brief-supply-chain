@@ -62,6 +62,13 @@ namespace csharp_brief_supply_chain.Database.Repositories
             if (entrepot.Id < 0)
                 return;
 
+            var entrepotGetById = GetById(entrepot.Id);
+            if (entrepotGetById != null)
+            {
+                Console.WriteLine($"Error while trying to insert entrepot {entrepot.Id}, entrepot already exist in database");
+                return;
+            }
+
             using (var cmd = new NpgsqlCommand("insert into entrepots (id, nom_entrepot, adresse, ville, pays) VALUES (@id, @nom_entrepot, @adresse, @ville, @pays)", Connection))
             {
                 cmd.Parameters.AddWithValue("id", entrepot.Id);
@@ -77,7 +84,7 @@ namespace csharp_brief_supply_chain.Database.Repositories
                 }
                 else
                 {
-                    Console.WriteLine($"Error while trying to save entrepot {entrepot.Id} {entrepot.Nom} in database");
+                    Console.WriteLine($"Error while trying to insert entrepot {entrepot.Id} {entrepot.Nom} in database");
                 }
             }
         }
