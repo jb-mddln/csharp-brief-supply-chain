@@ -23,6 +23,8 @@ namespace csharp_brief_supply_chain
             ExpeditionRepository expeditionRepository = new ExpeditionRepository(databaseManager.Connection);
             ExpeditionClientRepository expeditionClientRepository = new ExpeditionClientRepository(databaseManager.Connection);
 
+            // clientRepository.Insert(new Client(6, "nom", "adresse", "ville", "pays"));
+
             // Récupère toutes nos valeurs en base de données grace à notre repository et notre GetAll
             var allClients = clientRepository.GetAll();
             var allEntrepots = entrepotRepository.GetAll();

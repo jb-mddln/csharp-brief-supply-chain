@@ -10,26 +10,31 @@ namespace csharp_brief_supply_chain.Database.Entities
         /// <summary>
         /// Champ id sur notre table clients
         /// </summary>
+        [Column("id")]
         public int Id { get; set; }
 
         /// <summary>
-        /// Champ id sur notre table clients
+        /// Champ nom sur notre table clients
         /// </summary>
+        [Column("nom")]
         public string Nom { get; set; } = "";
 
         /// <summary>
-        /// Champ id sur notre table clients
+        /// Champ adresse sur notre table clients
         /// </summary>
+        [Column("adresse")]
         public string Adresse { get; set; } = "";
 
         /// <summary>
         /// Champ id sur notre table clients
         /// </summary>
+        [Column("ville")]
         public string Ville { get; set; } = "";
 
         /// <summary>
         /// Champ id sur notre table clients
         /// </summary>
+        [Column("pays")]
         public string Pays { get; set; } = "";
 
         /// <summary>
@@ -38,6 +43,16 @@ namespace csharp_brief_supply_chain.Database.Entities
         public Client()
         {
         }
+
+        public Client(int id, string nom, string adresse, string ville, string pays)
+        {
+            Id = id;
+            Nom = nom;
+            Adresse = adresse;
+            Ville = ville;
+            Pays = pays;
+        }
+
 
         /// <summary>
         /// Constructeur qui initialise notre objet avec le NpgsqlDataReader
