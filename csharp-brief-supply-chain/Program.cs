@@ -29,7 +29,6 @@ namespace csharp_brief_supply_chain
             var allExpeditions = expeditionRepository.GetAll();
             var allExpeditionsClients = expeditionClientRepository.GetAll();
 
-
             // Utilisation de string.join et Linq pour joindre nos clients et appeler notre ToString
             Console.WriteLine("Clients list:");
             Console.WriteLine(string.Join("\n", allClients.Select(client => client.ToString())));
